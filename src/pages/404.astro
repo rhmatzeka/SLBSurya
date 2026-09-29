@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Flower from '../components/ui/Flower.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout title="Halaman tidak ditemukan">
+  <section class="relative overflow-hidden bg-navy-900 text-white">
+    <Flower class="absolute -right-10 bottom-0 h-72 w-72 fill-navy-700/70" />
+    <div class="container-page relative py-24 sm:py-32">
+      <p class="font-serif text-lg text-yellow-400">404</p>
+      <h1 class="h-display mt-4 max-w-[16ch]">Halaman ini tidak ditemukan.</h1>
+      <p class="mt-6 max-w-md text-[17px] text-white/80">Mungkin tautannya sudah berubah. Yuk kembali ke beranda.</p>
+      <a href="/" class="btn-yellow mt-8 border-transparent px-6 py-3">
+        <Icon name="arrow-left" size={18} />
+        Kembali ke Beranda
+      </a>
+    </div>
+  </section>
+</BaseLayout>

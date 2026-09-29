@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import Header from '../components/sections/Header.astro';
+import Footer from '../components/sections/Footer.astro';
+import { campuses, school, socials } from '../content/site';
+import besleyLatin from '@fontsource-variable/besley/files/besley-latin-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = school.description } = Astro.props;
+const fullTitle = title ? `${title} · ${school.name}` : `${school.name} · ${school.slogan}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.jpg', Astro.site);
+
+const jsonLd = campuses.map((c) => ({
+  '@context': 'https://schema.org',
+  '@type': 'School',
+  name: c.name,
+  email: c.email,
+  url: Astro.site?.href,
+  logo: new URL('/apple-touch-icon.png', Astro.site).href,
+  foundingDate: String(school.founded),
+  parentOrganization: { '@type': 'Organization', name: school.foundation },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: c.address[0],
+    addressLocality: c.area,
+    addressCountry: 'ID',
+  },
+  sameAs: socials.map((s) => s.href),
+}));
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href={besleyLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0a3a60" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content={school.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-dvh">
+    <a
+      href="#konten"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-yellow-400 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
+      >Langsung ke konten</a
+    >
+    <Header />
+    <main id="konten">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Elemen [data-reveal] muncul halus saat masuk layar
+      const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

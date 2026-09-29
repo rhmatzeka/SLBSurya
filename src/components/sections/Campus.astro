@@ -1,0 +1,50 @@
+---
+import { getImage } from 'astro:assets';
+import Photo from '../ui/Photo.astro';
+import Icon from '../ui/Icon.astro';
+import { photo, videos } from '../../content/site';
+
+const video = videos[0];
+const poster = await getImage({ src: photo(video.poster).src, width: 960, format: 'webp' });
+---
+
+<section class="bg-cream pb-6 pt-4 sm:pt-8" aria-labelledby="lingkungan-title">
+  <div class="container-page">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+      <div class="relative aspect-[4/3] overflow-hidden rounded-xl sm:aspect-[1.18/1]" data-reveal>
+        <Photo id="sarana/green-house" sizes="(min-width: 1024px) 600px, 100vw" position="50% 60%" />
+        <button
+          type="button"
+          class="btn-yellow absolute bottom-4 left-4 border-transparent shadow-lg"
+          data-video-src={video.src}
+          data-video-title={video.title}
+          data-video-poster={poster.src}
+        >
+          <Icon name="play" size={14} />
+          Putar Video Kegiatan
+        </button>
+      </div>
+
+      <div data-reveal>
+        <p class="eyebrow">Lingkungan Kami</p>
+        <h2 id="lingkungan-title" class="h-section mt-4">
+          Ruang hijau tempat anak-anak belajar, merawat, dan bertumbuh.
+        </h2>
+        <p class="mt-6 text-[16px] leading-[1.75] text-ink/85">
+          Di sekolah kami, belajar tidak berhenti di dalam kelas. Siswa menanam sayur di <em>green house</em>, bergiliran
+          merawat kolam budidaya ikan nila, dan bermain di taman yang aman. Setiap sudut dirancang untuk melatih kemandirian,
+          tanggung jawab, dan rasa percaya diri anak berkebutuhan khusus.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-[1fr_1.45fr] gap-3" data-reveal>
+      <div class="aspect-[4/5] overflow-hidden rounded-xl sm:aspect-[1.05/1]">
+        <Photo id="sarana/taman-bermain" sizes="(min-width: 1024px) 480px, 40vw" />
+      </div>
+      <div class="aspect-[4/5] overflow-hidden rounded-xl sm:aspect-auto">
+        <Photo id="sarana/kolam-1" sizes="(min-width: 1024px) 700px, 60vw" />
+      </div>
+    </div>
+  </div>
+</section>

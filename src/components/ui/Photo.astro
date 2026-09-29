@@ -1,0 +1,35 @@
+---
+import { Picture } from 'astro:assets';
+import { photo, type PhotoKey } from '../../content/site';
+
+interface Props {
+  id: PhotoKey;
+  /** Nilai atribut sizes, contoh "(min-width: 1024px) 560px, 100vw" */
+  sizes?: string;
+  class?: string;
+  /** object-position, contoh "50% 30%" */
+  position?: string;
+  priority?: boolean;
+  widths?: number[];
+}
+
+const { id, sizes = '100vw', class: className = '', position, priority = false, widths = [360, 640, 960, 1280, 1600] } =
+  Astro.props;
+const p = photo(id);
+const usable = widths.filter((w) => w <= p.src.width);
+if (usable.length === 0 || usable[usable.length - 1] < p.src.width) usable.push(p.src.width);
+---
+
+<Picture
+  src={p.src}
+  alt={p.alt}
+  widths={usable}
+  sizes={sizes}
+  formats={['avif', 'webp']}
+  fallbackFormat="jpg"
+  quality={62}
+  class={`h-full w-full object-cover ${className}`}
+  style={position ? `object-position:${position}` : undefined}
+  priority={priority}
+  pictureAttributes={{ style: 'display:contents' }}
+/>

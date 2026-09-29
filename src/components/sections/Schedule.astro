@@ -1,0 +1,35 @@
+---
+import { weeklySchedule } from '../../content/site';
+---
+
+<section class="bg-cream py-20 sm:py-24" aria-labelledby="jadwal-title">
+  <div class="container-page">
+    <h2 id="jadwal-title" class="rule-dashed pb-4 font-serif text-[1.9rem] leading-tight text-navy-700 sm:text-[2.5rem]" data-reveal>
+      Jadwal kegiatan vokasi setiap pekan:
+    </h2>
+
+    <div class="mt-6 text-[14px]" data-reveal>
+      {
+        weeklySchedule.map((d) => (
+          <div>
+            <h3 class="border-b border-cream-200 bg-cream-200/80 px-3 py-2.5 font-sans text-[13px] font-bold text-navy-700">
+              <span class="underline decoration-1 underline-offset-4">{d.day}</span>
+            </h3>
+            <ul>
+              {d.items.map((it) => (
+                <li class="grid grid-cols-[110px_1fr] items-baseline gap-x-4 gap-y-1 border-b border-cream-200 px-3 py-3 sm:grid-cols-[150px_1fr_auto]">
+                  <span class="text-ink/80">{it.time}</span>
+                  <span class="flex items-baseline gap-3">
+                    <span class="h-1.5 w-1.5 shrink-0 translate-y-[-2px] rounded-full bg-ink" aria-hidden="true" />
+                    <span class="text-ink underline decoration-ink/30 underline-offset-4">{it.title}</span>
+                  </span>
+                  <span class="col-start-2 pl-[18px] text-[13px] text-muted sm:col-start-3 sm:pl-0">{it.mentor}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

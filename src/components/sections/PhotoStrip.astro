@@ -1,0 +1,16 @@
+---
+import Photo from '../ui/Photo.astro';
+import { photoStrip } from '../../content/site';
+---
+
+<section class="overflow-hidden bg-cream pb-6" aria-label="Foto kegiatan siswa">
+  <ul class="no-scrollbar flex snap-x gap-4 overflow-x-auto px-4 sm:gap-12 sm:px-0 sm:[margin-left:-4vw]">
+    {
+      photoStrip.map((id) => (
+        <li class="aspect-[1.2/1] w-[78vw] shrink-0 snap-center overflow-hidden rounded-xl sm:w-[29vw]">
+          <Photo id={id} sizes="(min-width: 640px) 30vw, 80vw" widths={[400, 640, 900]} position="50% 35%" />
+        </li>
+      ))
+    }
+  </ul>
+</section>

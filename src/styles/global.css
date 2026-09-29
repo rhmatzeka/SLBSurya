@@ -1,0 +1,122 @@
+@import '@fontsource-variable/besley';
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+@theme {
+  --font-serif: 'Besley Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Warna dari logo & profil PDF SLB Surya Wiyata */
+  --color-navy-950: #072a47;
+  --color-navy-900: #0a3a60;
+  --color-navy-700: #0f5286;
+  --color-blue-600: #0668c9;
+  --color-blue-500: #0780f7;
+  --color-blue-200: #bcd8f5;
+  --color-blue-100: #dceaf9;
+  --color-blue-50: #eaf3fd;
+  --color-yellow-400: #ffe44a;
+  --color-yellow-300: #f8fa17;
+  --color-yellow-100: #fff6c2;
+  --color-ink: #121417;
+  --color-muted: #4a5260;
+  --color-line: #d9d4c7;
+  --color-cream: #f9f6ef;
+  --color-cream-200: #f1ece1;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal;
+    text-wrap: balance;
+  }
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-blue-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8;
+}
+@utility eyebrow {
+  @apply text-[13px] font-medium tracking-[0.01em] text-blue-600;
+}
+@utility h-display {
+  @apply font-serif text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[4.4rem];
+}
+@utility h-section {
+  @apply font-serif text-[2rem] leading-[1.12] text-navy-700 sm:text-[2.6rem];
+}
+@utility rule-dashed {
+  background-image: linear-gradient(to right, var(--color-line) 50%, transparent 0);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200;
+}
+@utility btn-yellow {
+  @apply btn border border-ink/80 bg-yellow-400 text-ink hover:bg-yellow-300;
+}
+@utility btn-outline {
+  @apply btn border border-line bg-transparent text-navy-700 hover:border-navy-700 hover:bg-white;
+}
+@utility btn-outline-light {
+  @apply btn border border-white/40 text-white hover:border-white hover:bg-white/10;
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Muncul halus saat di-scroll (dimatikan jika reduced-motion) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+html:not(.js) [data-reveal] {
+  opacity: 1;
+  transform: none;
+}

@@ -1,0 +1,22 @@
+---
+/** Matahari terbit dengan sinar ("Surya"), pengganti siluet pagar di footer referensi. */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+const cx = 600;
+const cy = 330;
+const rays = Array.from({ length: 11 }, (_, i) => {
+  const a = Math.PI + ((i + 0.5) * Math.PI) / 11;
+  const p = (r: number, ang: number) => `${(cx + Math.cos(ang) * r).toFixed(1)},${(cy + Math.sin(ang) * r).toFixed(1)}`;
+  return `M${p(175, a - 0.035)} L${p(330, a - 0.06)} L${p(330, a + 0.06)} L${p(175, a + 0.035)} Z`;
+});
+---
+
+<svg viewBox="0 0 1200 330" preserveAspectRatio="xMidYMax meet" aria-hidden="true" class={className}>
+  <g class="fill-navy-700">
+    {rays.map((d) => <path d={d} />)}
+  </g>
+  <circle cx={cx} cy={cy} r="150" class="fill-navy-700" />
+  <circle cx={cx} cy={cy} r="118" class="fill-yellow-400" />
+</svg>

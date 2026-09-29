@@ -1,0 +1,23 @@
+---
+/** Bunga lima kelopak, diambil dari bentuk tepi logo Surya Wiyata. Dekoratif. */
+interface Props {
+  class?: string;
+  /** Tampilkan lingkaran dalam (seperti cincin kuning di logo) */
+  ring?: boolean;
+  ringClass?: string;
+  style?: string;
+}
+const { class: className = '', ring = false, ringClass = 'fill-yellow-400', style } = Astro.props;
+const lobes = Array.from({ length: 5 }, (_, i) => {
+  const a = ((-90 + i * 72) * Math.PI) / 180;
+  return { cx: 50 + Math.cos(a) * 26, cy: 50 + Math.sin(a) * 26 };
+});
+---
+
+<svg viewBox="0 0 100 100" aria-hidden="true" class={className} style={style}>
+  <g>
+    {lobes.map((l) => <circle cx={l.cx.toFixed(2)} cy={l.cy.toFixed(2)} r="22" />)}
+    <circle cx="50" cy="50" r="27" />
+  </g>
+  {ring && <circle cx="50" cy="50" r="22" class={ringClass} />}
+</svg>

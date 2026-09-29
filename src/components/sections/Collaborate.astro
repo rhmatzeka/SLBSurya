@@ -1,0 +1,48 @@
+---
+import Icon from '../ui/Icon.astro';
+import Flower from '../ui/Flower.astro';
+import { needs, campuses } from '../../content/site';
+---
+
+<section class="relative overflow-hidden bg-navy-900 py-20 text-white sm:py-24" aria-labelledby="kolaborasi-title">
+  <Flower class="absolute -right-24 -top-24 h-80 w-80 fill-navy-700/60" />
+  <Flower class="absolute -bottom-28 -left-20 h-72 w-72 fill-navy-700/50" />
+
+  <div class="container-page relative">
+    <div class="max-w-2xl" data-reveal>
+      <p class="text-[13px] font-medium text-yellow-400">Mari Berkolaborasi</p>
+      <h2 id="kolaborasi-title" class="mt-4 font-serif text-[2rem] leading-[1.12] sm:text-[2.6rem]">
+        Bersama, kita bisa membawa lebih banyak harapan.
+      </h2>
+      <p class="mt-6 text-[16px] leading-[1.75] text-white/80">
+        Pengembangan kualitas layanan pendidikan adalah bagian dari rencana strategis kami. Kami membuka pintu bagi donatur,
+        gereja, komunitas, serta Dunia Usaha dan Dunia Industri (DU/DI) untuk bertumbuh bersama di tiga bidang ini:
+      </p>
+    </div>
+
+    <ol class="mt-12 grid gap-5 md:grid-cols-3">
+      {
+        needs.map((n, i) => (
+          <li class="rounded-xl bg-white/[0.06] p-6 ring-1 ring-white/10" data-reveal>
+            <div class="flex items-center justify-between">
+              <span class="grid h-11 w-11 place-items-center rounded-full bg-yellow-400 text-ink">
+                <Icon name={n.icon} size={20} />
+              </span>
+              <span class="font-serif text-4xl text-white/20">0{i + 1}</span>
+            </div>
+            <h3 class="mt-5 font-serif text-xl leading-snug">{n.title}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-white/75">{n.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-10 flex flex-wrap gap-3" data-reveal>
+      <a href={`mailto:${campuses[0].email}?subject=Kerja%20sama%20dengan%20SLB%20Surya%20Wiyata`} class="btn-yellow border-transparent px-6 py-3">
+        <Icon name="heart" size={18} />
+        Ajukan Kerja Sama
+      </a>
+      <a href="#kontak" class="btn-outline-light px-6 py-3">Lihat Kontak</a>
+    </div>
+  </div>
+</section>

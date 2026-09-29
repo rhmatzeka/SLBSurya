@@ -1,0 +1,52 @@
+---
+import Photo from '../ui/Photo.astro';
+import Icon from '../ui/Icon.astro';
+import { levels, levelNote } from '../../content/site';
+
+const tone = {
+  navy: 'bg-navy-700 text-white',
+  blue: 'bg-blue-600 text-white',
+  yellow: 'bg-yellow-400 text-ink',
+};
+---
+
+<section class="bg-cream pb-6 pt-20 sm:pt-24" aria-labelledby="jenjang-title">
+  <div class="container-page">
+    <h2 id="jenjang-title" class="mx-auto max-w-[20ch] text-center font-serif text-[2rem] leading-[1.15] text-navy-700 sm:text-[2.5rem]" data-reveal>
+      Tiga jenjang, satu keluarga besar.
+    </h2>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-3 lg:gap-7">
+      {
+        levels.map((l) => (
+          <article class="group flex flex-col overflow-hidden rounded-xl" data-reveal>
+            <div class="aspect-[4/3.4] overflow-hidden">
+              <Photo
+                id={l.image}
+                sizes="(min-width: 640px) 33vw, 100vw"
+                class="transition-transform duration-700 group-hover:scale-105"
+                position="50% 40%"
+              />
+            </div>
+            <div class:list={['flex flex-1 items-end justify-between gap-3 px-5 py-4', tone[l.tone]]}>
+              <div>
+                <h3 class="font-serif text-[1.7rem] leading-none">{l.name}</h3>
+                <p class="mt-2 text-[13px] opacity-85">
+                  {l.full} · {l.classes}
+                </p>
+              </div>
+              <p class="shrink-0 text-right leading-none">
+                <span class="block font-serif text-3xl">{l.students}</span>
+                <span class="text-[11px] opacity-85">siswa</span>
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <p class="mt-5 flex items-start gap-2 text-[13px] text-muted" data-reveal>
+      <Icon name="users" size={16} class="mt-px shrink-0" />
+      {levelNote}
+    </p>
+  </div>
+</section>

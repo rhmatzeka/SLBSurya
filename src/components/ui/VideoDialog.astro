@@ -1,0 +1,50 @@
+---
+/** Satu dialog video untuk seluruh halaman. Tombol pemicu: data-video-src, data-video-title. */
+import Icon from './Icon.astro';
+---
+
+<dialog
+  class="m-auto w-[min(92vw,960px)] overflow-visible bg-transparent p-0 backdrop:bg-ink/85 backdrop:backdrop-blur-sm"
+  aria-label="Video"
+  data-video-dialog
+>
+  <div class="relative">
+    <button
+      type="button"
+      class="absolute -top-12 right-0 grid h-10 w-10 place-items-center rounded-full bg-white text-ink hover:bg-yellow-400"
+      aria-label="Tutup video"
+      data-video-close
+    >
+      <Icon name="close" size={20} />
+    </button>
+    <video class="aspect-video w-full rounded-xl bg-black" controls playsinline preload="none" data-video-el></video>
+    <p class="mt-3 text-center text-sm text-white/80" data-video-title></p>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-video-dialog]');
+  const video = dialog?.querySelector<HTMLVideoElement>('[data-video-el]');
+  const title = dialog?.querySelector<HTMLElement>('[data-video-title]');
+  if (dialog && video) {
+    document.querySelectorAll<HTMLElement>('[data-video-src]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        video.src = btn.dataset.videoSrc ?? '';
+        if (btn.dataset.videoPoster) video.poster = btn.dataset.videoPoster;
+        if (title) title.textContent = btn.dataset.videoTitle ?? '';
+        dialog.showModal();
+        video.play().catch(() => {});
+      });
+    });
+    const close = () => dialog.close();
+    dialog.querySelector('[data-video-close]')?.addEventListener('click', close);
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) close();
+    });
+    dialog.addEventListener('close', () => {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    });
+  }
+</script>

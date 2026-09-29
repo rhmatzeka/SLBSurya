@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo/logo.png';
+import Icon from '../ui/Icon.astro';
+import { campuses, nav, socials } from '../../content/site';
+---
+
+<div class="hidden bg-navy-950 text-[13px] text-white/85 md:block">
+  <div class="container-page flex h-9 items-center justify-end gap-6">
+    {
+      campuses.map((c) => (
+        <a href={`mailto:${c.email}`} class="inline-flex items-center gap-1.5 hover:text-yellow-400">
+          <Icon name="mail" size={14} />
+          {c.short}
+        </a>
+      ))
+    }
+    {
+      socials.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 hover:text-yellow-400">
+          <Icon name={s.id} size={14} />
+          {s.label}
+        </a>
+      ))
+    }
+    <a href="/galeri" class="inline-flex items-center gap-1.5 hover:text-yellow-400">
+      <Icon name="image" size={14} />
+      Galeri
+    </a>
+  </div>
+</div>
+
+<header class="sticky top-0 z-50 bg-navy-900 text-white" data-header>
+  <div class="container-page flex h-[72px] items-center justify-between gap-6">
+    <a href="/" class="flex shrink-0 items-center gap-3" aria-label="SLB Surya Wiyata, ke beranda">
+      <Image src={logo} alt="" width={48} height={48} densities={[1, 2, 3]} class="h-12 w-12" loading="eager" />
+      <span class="leading-none">
+        <span class="block font-serif text-[1.15rem] tracking-tight">SLB Surya Wiyata</span>
+        <span class="mt-1 block text-[11px] tracking-wide text-white/70">Sejak 1972</span>
+      </span>
+    </a>
+
+    <nav aria-label="Navigasi utama" class="hidden lg:block">
+      <ul class="flex items-center gap-7 text-[15px] font-medium">
+        {
+          nav.map((n) => (
+            <li>
+              <a href={n.href} class="py-2 text-white/90 transition-colors hover:text-yellow-400">
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="/#kontak" class="btn-yellow hidden border-transparent sm:inline-flex">Hubungi Kami</a>
+      <button
+        type="button"
+        class="btn-yellow border-transparent lg:hidden"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        data-menu-toggle
+      >
+        <span data-menu-label>Menu</span>
+        <Icon name="menu" size={18} class="menu-open-icon" />
+        <Icon name="close" size={18} class="menu-close-icon hidden" />
+      </button>
+    </div>
+  </div>
+
+  <div id="menu-mobile" class="hidden border-t border-white/10 bg-navy-900 lg:hidden" data-menu>
+    <nav aria-label="Navigasi seluler" class="container-page py-6">
+      <ul class="divide-y divide-white/10">
+        {
+          nav.map((n) => (
+            <li>
+              <a href={n.href} class="flex items-center justify-between py-3.5 font-serif text-2xl" data-menu-link>
+                {n.label}
+                <Icon name="chevron-right" size={20} class="text-yellow-400" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          socials.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener" class="btn-outline-light py-2">
+              <Icon name={s.id} size={16} />
+              {s.label}
+            </a>
+          ))
+        }
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      btn.querySelector('.menu-open-icon')?.classList.toggle('hidden', open);
+      btn.querySelector('.menu-close-icon')?.classList.toggle('hidden', !open);
+      const label = btn.querySelector('[data-menu-label]');
+      if (label) label.textContent = open ? 'Tutup' : 'Menu';
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        btn.focus();
+      }
+    });
+  }
+</script>
