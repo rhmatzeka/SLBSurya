@@ -4,7 +4,7 @@ import Icon from '../ui/Icon.astro';
 import { missions } from '../../content/site';
 ---
 
-<section id="visi-misi" class="overflow-hidden bg-cream py-14 sm:py-24" aria-labelledby="misi-title">
+<section id="visi-misi" class="bg-cream pt-14 sm:pt-24" aria-labelledby="misi-title">
   <div class="container-page text-center" data-reveal>
     <p class="eyebrow">Misi Kami</p>
     <h2 id="misi-title" class="mx-auto mt-3 max-w-[24ch] font-serif text-[1.55rem] leading-[1.18] text-navy-700 sm:mt-4 sm:text-[2.7rem]">
@@ -12,91 +12,189 @@ import { missions } from '../../content/site';
     </h2>
   </div>
 
-  <div class="relative mt-8 sm:mt-12" data-carousel>
-    <ul
-      class="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[max(1rem,calc(50vw-190px))] pb-2 sm:gap-8 sm:px-[calc(50vw-200px)]"
-      data-carousel-track
-      aria-label="Misi SLB Surya Wiyata"
-    >
-      {
-        missions.map((m, i) => (
-          <li class="w-[min(80vw,380px)] shrink-0 snap-center sm:w-[400px]" data-carousel-item>
-            <article class="relative">
-              <div class="aspect-[1/1.02] overflow-hidden rounded-t-full rounded-b-xl bg-blue-100">
-                <Photo id={m.image} sizes="400px" widths={[400, 640, 800]} />
-              </div>
-              <div class="relative -mt-24 mx-4 rounded-xl bg-white px-5 py-6 text-center shadow-[0_18px_40px_-22px_rgba(10,58,96,0.35)] sm:mx-6">
-                <p class="text-xs font-semibold tracking-wider text-blue-600">MISI {i + 1}</p>
-                <h3 class="mt-1 font-serif text-[1.45rem] leading-tight text-ink sm:text-3xl">{m.title}</h3>
-                <p class="mt-3 text-[15px] leading-relaxed text-muted">{m.text}</p>
-              </div>
-            </article>
-          </li>
-        ))
-      }
-    </ul>
+  <!--
+    Saat halaman di-scroll, bagian ini menempel dan kartu bergerak ke samping.
+    Tanpa JS atau dengan reduced-motion, kartu tetap bisa digeser biasa (scroll-snap).
+  -->
+  <div class="relative pb-14 sm:pb-24" data-hscroll>
+    <div class="relative flex flex-col justify-center overflow-hidden pt-8 sm:pt-12" data-hscroll-sticky>
+      <ul
+        class="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1rem,calc((100vw-1200px)/2+2rem))] pb-2 sm:gap-8"
+        data-hscroll-track
+        aria-label="Misi SLB Surya Wiyata"
+      >
+        {
+          missions.map((m, i) => (
+            <li class="w-[min(78vw,340px)] shrink-0 snap-start sm:w-[400px]" data-hscroll-item>
+              <article class="relative">
+                <div class="aspect-[1/1.02] overflow-hidden rounded-t-full rounded-b-xl bg-blue-100">
+                  <Photo id={m.image} sizes="(min-width: 640px) 400px, 78vw" widths={[360, 640, 800]} />
+                </div>
+                <div class="relative mx-4 -mt-24 rounded-xl bg-white px-5 py-6 text-center shadow-[0_18px_40px_-22px_rgba(10,58,96,0.35)] sm:mx-6">
+                  <p class="text-xs font-semibold tracking-wider text-blue-600">MISI {i + 1}</p>
+                  <h3 class="mt-1 font-serif text-[1.45rem] leading-tight text-ink sm:text-3xl">{m.title}</h3>
+                  <p class="mt-3 text-[15px] leading-relaxed text-muted">{m.text}</p>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
 
-    <button
-      type="button"
-      class="absolute left-3 top-[34%] grid h-12 w-12 place-items-center rounded-full border border-ink/80 bg-yellow-400 text-ink shadow-md transition hover:bg-yellow-300 disabled:opacity-40 sm:left-[calc(50vw-280px)] sm:h-14 sm:w-14 lg:left-[calc(50vw-330px)]"
-      aria-label="Misi sebelumnya"
-      data-carousel-prev
-    >
-      <Icon name="chevron-left" size={20} strokeWidth={2.4} />
-    </button>
-    <button
-      type="button"
-      class="absolute right-3 top-[34%] grid h-12 w-12 place-items-center rounded-full border border-ink/80 bg-yellow-400 text-ink shadow-md transition hover:bg-yellow-300 disabled:opacity-40 sm:right-[calc(50vw-280px)] sm:h-14 sm:w-14 lg:right-[calc(50vw-330px)]"
-      aria-label="Misi berikutnya"
-      data-carousel-next
-    >
-      <Icon name="chevron-right" size={20} strokeWidth={2.4} />
-    </button>
-
-    <div class="mt-8 flex justify-center gap-1.5" aria-hidden="true">
-      {missions.map((_, i) => <span class:list={['h-1 w-6 rounded-full transition-colors', i === 0 ? 'bg-blue-500' : 'bg-line']} data-carousel-dot />)}
+      <div class="container-page mt-8 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          class="grid h-11 w-11 place-items-center rounded-full border border-ink/80 bg-yellow-400 text-ink transition hover:bg-yellow-300 disabled:cursor-default disabled:border-line disabled:bg-cream-200 disabled:text-ink/40 sm:h-12 sm:w-12"
+          aria-label="Misi sebelumnya"
+          data-hscroll-prev
+        >
+          <Icon name="chevron-left" size={20} strokeWidth={2.4} />
+        </button>
+        <div class="flex gap-1.5" aria-hidden="true">
+          {missions.map((_, i) => <span class:list={['h-1 w-6 rounded-full transition-colors', i === 0 ? 'bg-blue-500' : 'bg-line']} data-hscroll-dot />)}
+        </div>
+        <button
+          type="button"
+          class="grid h-11 w-11 place-items-center rounded-full border border-ink/80 bg-yellow-400 text-ink transition hover:bg-yellow-300 disabled:cursor-default disabled:border-line disabled:bg-cream-200 disabled:text-ink/40 sm:h-12 sm:w-12"
+          aria-label="Misi berikutnya"
+          data-hscroll-next
+        >
+          <Icon name="chevron-right" size={20} strokeWidth={2.4} />
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
-    const track = root.querySelector<HTMLElement>('[data-carousel-track]');
-    const items = [...root.querySelectorAll<HTMLElement>('[data-carousel-item]')];
-    const dots = [...root.querySelectorAll<HTMLElement>('[data-carousel-dot]')];
-    const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
-    const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
-    if (!track || !items.length) return;
+  const root = document.querySelector<HTMLElement>('[data-hscroll]');
+  const sticky = root?.querySelector<HTMLElement>('[data-hscroll-sticky]');
+  const track = root?.querySelector<HTMLElement>('[data-hscroll-track]');
+  const items = root ? [...root.querySelectorAll<HTMLElement>('[data-hscroll-item]')] : [];
+  const dots = root ? [...root.querySelectorAll<HTMLElement>('[data-hscroll-dot]')] : [];
+  const prev = root?.querySelector<HTMLButtonElement>('[data-hscroll-prev]');
+  const next = root?.querySelector<HTMLButtonElement>('[data-hscroll-next]');
 
-    const activeIndex = () => {
-      const center = track.scrollLeft + track.clientWidth / 2;
+  if (root && sticky && track && items.length) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    let pinned = false;
+    let shift = 0; // jarak geser horizontal maksimum (px)
+    let headerH = 0;
+
+    const setActive = (index: number) => {
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-blue-500', i === index);
+        d.classList.toggle('bg-line', i !== index);
+      });
+      if (prev) prev.disabled = index <= 0;
+      if (next) next.disabled = index >= items.length - 1;
+    };
+
+    // Mode geser biasa (cadangan)
+    const nativeIndex = () => {
+      const x = track.scrollLeft;
+      const start = items[0].offsetLeft;
       let best = 0;
-      let dist = Infinity;
       items.forEach((it, i) => {
-        const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - center);
-        if (d < dist) {
-          dist = d;
-          best = i;
-        }
+        if (Math.abs(it.offsetLeft - start - x) < Math.abs(items[best].offsetLeft - start - x)) best = i;
       });
       return best;
     };
-    const go = (i: number) => {
-      const it = items[Math.max(0, Math.min(items.length - 1, i))];
-      track.scrollTo({ left: it.offsetLeft + it.offsetWidth / 2 - track.clientWidth / 2 });
+
+    // Mode scroll -> geser ke samping
+    const progress = () => {
+      const top = root.getBoundingClientRect().top;
+      return shift > 0 ? Math.min(1, Math.max(0, (headerH - top) / shift)) : 0;
     };
-    const update = () => {
-      const a = activeIndex();
-      dots.forEach((d, i) => {
-        d.classList.toggle('bg-blue-500', i === a);
-        d.classList.toggle('bg-line', i !== a);
-      });
-      if (prev) prev.disabled = a === 0;
-      if (next) next.disabled = a === items.length - 1;
+    const render = () => {
+      if (!pinned) return;
+      const p = progress();
+      track.style.transform = `translate3d(${(-p * shift).toFixed(1)}px,0,0)`;
+      setActive(Math.round(p * (items.length - 1)));
     };
-    prev?.addEventListener('click', () => go(activeIndex() - 1));
-    next?.addEventListener('click', () => go(activeIndex() + 1));
-    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
-    update();
-  });
+
+    const layout = () => {
+      headerH = header?.offsetHeight ?? 0;
+      const stickyH = window.innerHeight - headerH;
+      pinned = false;
+      track.style.transform = '';
+      track.style.overflow = '';
+      root.style.height = '';
+      sticky.style.cssText = '';
+
+      if (reduce.matches) {
+        setActive(nativeIndex());
+        return;
+      }
+      track.scrollLeft = 0;
+      shift = Math.max(0, track.scrollWidth - track.clientWidth);
+      // Tidak perlu menempel jika semua kartu sudah terlihat, atau kartunya lebih tinggi dari layar
+      if (shift < 8 || sticky.offsetHeight > stickyH) {
+        setActive(nativeIndex());
+        return;
+      }
+      pinned = true;
+      track.style.overflow = 'visible';
+      sticky.style.position = 'sticky';
+      sticky.style.top = `${headerH}px`;
+      sticky.style.height = `${stickyH}px`;
+      root.style.height = `${stickyH + shift + parseFloat(getComputedStyle(root).paddingBottom)}px`;
+      render();
+    };
+
+    const go = (index: number) => {
+      const i = Math.max(0, Math.min(items.length - 1, index));
+      if (pinned) {
+        const absTop = window.scrollY + root.getBoundingClientRect().top;
+        window.scrollTo({ top: absTop - headerH + (i / (items.length - 1)) * shift, behavior: 'smooth' });
+      } else {
+        track.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: 'smooth' });
+      }
+    };
+    const current = () => (pinned ? Math.round(progress() * (items.length - 1)) : nativeIndex());
+    prev?.addEventListener('click', () => go(current() - 1));
+    next?.addEventListener('click', () => go(current() + 1));
+
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking || !pinned) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          render();
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+    track.addEventListener('scroll', () => !pinned && setActive(nativeIndex()), { passive: true });
+    let resizeTimer: number | undefined;
+    let lastWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+      // abaikan resize tinggi kecil karena address bar HP muncul/hilang
+      if (Math.abs(window.innerWidth - lastWidth) < 1 && pinned) return;
+      lastWidth = window.innerWidth;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(layout, 150);
+    });
+    reduce.addEventListener('change', layout);
+    track.style.willChange = 'transform';
+    layout();
+
+    // Saat pengunjung mendekati bagian ini, semua foto misi dimuat sekaligus
+    // supaya tidak ada kartu kosong ketika bergeser masuk dari samping.
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          track.querySelectorAll('img').forEach((img) => (img.loading = 'eager'));
+          io.disconnect();
+        },
+        { rootMargin: '1200px 0px' },
+      );
+      io.observe(root);
+    }
+  }
 </script>
