@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://slbsurya.vercel.app/sitemap-index.xml
+Sitemap: https://slb-surya-wiyata.vercel.app/sitemap-index.xml

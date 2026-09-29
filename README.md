@@ -60,7 +60,7 @@ Everything a non-developer might want to change lives in `src/content/site.ts`.
 
 ## Deployment
 
-The site is deployed on Vercel. The **Astro** preset is detected automatically (`npm run build`, output `dist`), and no adapter is needed because the site is fully static. Pushing to `main` triggers a new production deployment.
+The site is live at **https://slb-surya-wiyata.vercel.app** (Vercel). The **Astro** preset is detected automatically (`npm run build`, output `dist`), and no adapter is needed because the site is fully static. Pushing to `main` triggers a new production deployment.
 
 If the domain changes, update `site` in `astro.config.mjs` and the sitemap URL in `public/robots.txt`.
 
