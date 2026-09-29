@@ -2,6 +2,8 @@
 
 The official landing page of **SLB Surya Wiyata**, a special-needs school (*Sekolah Luar Biasa*) in Bekasi and East Jakarta, Indonesia. Since 1972 the school has served children who are deaf or hard of hearing, children with intellectual disabilities, autism, and Down syndrome. Its motto: *Bring Hope for a Brighter Future*.
 
+**Live site:** https://slb-surya-wiyata.vercel.app
+
 The site itself is in Indonesian, because it is written for parents, donors, and partners in Indonesia.
 
 ## Features
