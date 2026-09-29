@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PageNext from '../components/ui/PageNext.astro';
+import Campus from '../components/sections/Campus.astro';
+import Facilities from '../components/sections/Facilities.astro';
+import { pageByHref } from '../content/site';
+
+const page = pageByHref('/sarana');
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <PageHero
+    eyebrow={page.label}
+    title="Ruang yang aman untuk belajar dan bertumbuh."
+    intro="Dari green house dan kolam ikan nila hingga ruang kelas, perpustakaan, dan ruang tunggu orang tua."
+    image="sarana/taman-bermain"
+    sections={[
+      { label: 'Lingkungan', href: '#lingkungan' },
+      { label: 'Fasilitas', href: '#sarana' },
+    ]}
+  />
+  <Campus />
+  <Facilities />
+  <PageNext href="/kegiatan" />
+</BaseLayout>

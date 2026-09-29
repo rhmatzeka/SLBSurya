@@ -8,12 +8,16 @@ The site itself is in Indonesian, because it is written for parents, donors, and
 
 ## Features
 
-- **Home page** with a hero slideshow, about, key numbers, school grounds, facilities (tabbed), vocational programs, mission carousel, vision with video, school levels, weekly schedule, activities, teachers and staff, partnership call, and contact details for both campuses
-- **Photo gallery** (`/galeri`) with every school photo, grouped by category, with a keyboard- and swipe-friendly lightbox
+- **Seven focused pages** instead of one long page: Home, About (`/tentang`), Programs (`/program`), Facilities (`/sarana`), Activities (`/kegiatan`), Gallery (`/galeri`), and Contact (`/kontak`)
+- **Easy to follow**: every page opens with the same header (breadcrumb, title, short intro, "on this page" jump links), the menu highlights the current page, and each page ends with a "Next" card that leads visitors through the site
+- **Seamless navigation**: cross-document View Transitions (no JavaScript) keep the header still while the content fades in, and links are prefetched on hover so pages open instantly
+- **Home page** kept short: hero slideshow, a short introduction, key numbers, "explore" cards to each page, latest activities, and a contact call to action
+- **Scroll-driven mission cards** on the About page that slide sideways while you scroll
+- **Photo gallery** with every school photo, grouped by category, with a keyboard- and swipe-friendly lightbox
 - **Mobile-first layout** that follows the reference design on phones and desktops
-- **Fast and light**: fully static, about 1.6 KB of JavaScript (gzipped), images served as AVIF/WebP in responsive sizes
-- **SEO ready**: meta and Open Graph tags, share image, `School` JSON-LD for both campuses, sitemap, robots.txt
-- **Accessible**: semantic markup, alt text on every photo, visible focus, respects reduced motion (Lighthouse accessibility 100)
+- **Fast and light**: fully static, a few KB of JavaScript, images served as AVIF/WebP in responsive sizes
+- **SEO ready**: per-page titles and descriptions, Open Graph share image, `School` JSON-LD for both campuses, sitemap, robots.txt
+- **Accessible**: semantic markup, alt text on every photo, visible focus, respects reduced motion
 
 ## Tech stack
 
@@ -44,9 +48,9 @@ The first build takes a few minutes because every photo is encoded to AVIF and W
 | Path | What it holds |
 |---|---|
 | `src/content/site.ts` | All text and data: school info, campuses, programs, schedule, staff, photo captions |
-| `src/pages/` | `index.astro` (home), `galeri.astro` (gallery), `404.astro` |
+| `src/pages/` | One file per page: `index`, `tentang`, `program`, `sarana`, `kegiatan`, `galeri`, `kontak`, `404` |
 | `src/components/sections/` | One component per page section (Hero, About, Programs, Footer, ...) |
-| `src/components/ui/` | Small building blocks: `Photo`, `Icon`, `Flower`, `SunRise`, `VideoDialog` |
+| `src/components/ui/` | Building blocks: `PageHero`, `PageNext`, `Photo`, `Icon`, `Flower`, `SunRise`, `VideoDialog` |
 | `src/layouts/BaseLayout.astro` | HTML shell, SEO tags, header and footer |
 | `src/styles/global.css` | Tailwind setup, color tokens, shared utilities |
 | `src/assets/images/` | Source photos, grouped by category |
@@ -57,6 +61,7 @@ The first build takes a few minutes because every photo is encoded to AVIF and W
 Everything a non-developer might want to change lives in `src/content/site.ts`.
 
 - **Text**: edit the matching object (for example `programs`, `weeklySchedule`, `teachers`).
+- **Pages**: page titles, descriptions, and card photos used by the menu, footer, and "Next" cards live in `pages`.
 - **Photos**: put a `.jpg` in `src/assets/images/<category>/` and add its caption to the `captions` object. It is optimized on build and shows up in the gallery automatically.
 - **Videos**: put an `.mp4` in `public/videos/` and register it in `videos`.
 

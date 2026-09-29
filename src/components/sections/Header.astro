@@ -3,6 +3,9 @@ import { Image } from 'astro:assets';
 import logo from '../../assets/logo/logo.png';
 import Icon from '../ui/Icon.astro';
 import { campuses, nav, socials } from '../../content/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
 <div class="bg-navy-950 text-[11px] text-white/85 sm:text-[13px]">
@@ -30,7 +33,7 @@ import { campuses, nav, socials } from '../../content/site';
   </div>
 </div>
 
-<header class="sticky top-0 z-50 bg-navy-900 text-white" data-header>
+<header class="sticky top-0 z-50 bg-navy-900 text-white [view-transition-name:site-header]" data-header>
   <div class="container-page flex h-16 items-center justify-between gap-4 sm:h-[72px] sm:gap-6">
     <a href="/" class="flex shrink-0 items-center gap-3" aria-label="SLB Surya Wiyata, ke beranda">
       <Image src={logo} alt="" width={48} height={48} densities={[1, 2, 3]} class="h-10 w-10 sm:h-12 sm:w-12" loading="eager" />
@@ -45,7 +48,11 @@ import { campuses, nav, socials } from '../../content/site';
         {
           nav.map((n) => (
             <li>
-              <a href={n.href} class="py-2 text-white/90 transition-colors hover:text-yellow-400">
+              <a
+                href={n.href}
+                aria-current={isActive(n.href) ? 'page' : undefined}
+                class="relative py-2 text-white/90 transition-colors hover:text-yellow-400 aria-[current=page]:text-yellow-400 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-0 aria-[current=page]:after:-bottom-0.5 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-yellow-400"
+              >
                 {n.label}
               </a>
             </li>
@@ -55,9 +62,9 @@ import { campuses, nav, socials } from '../../content/site';
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="/#kontak" class="btn-yellow hidden border-transparent sm:inline-flex">Hubungi Kami</a>
+      <a href="/kontak" class="btn-yellow hidden border-transparent sm:inline-flex">Hubungi Kami</a>
       <a
-        href="/#kontak"
+        href="/kontak"
         class="grid h-10 w-10 place-items-center rounded-full border border-white/40 text-white hover:border-white sm:hidden"
         aria-label="Hubungi kami"
       >
@@ -81,9 +88,14 @@ import { campuses, nav, socials } from '../../content/site';
     <nav aria-label="Navigasi seluler" class="container-page py-6">
       <ul class="divide-y divide-white/10">
         {
-          nav.map((n) => (
+          [{ label: 'Beranda', href: '/' }, ...nav].map((n) => (
             <li>
-              <a href={n.href} class="flex items-center justify-between py-3.5 font-serif text-2xl" data-menu-link>
+              <a
+                href={n.href}
+                aria-current={(n.href === '/' ? path === '/' : isActive(n.href)) ? 'page' : undefined}
+                class="flex items-center justify-between py-3.5 font-serif text-2xl aria-[current=page]:text-yellow-400"
+                data-menu-link
+              >
                 {n.label}
                 <Icon name="chevron-right" size={20} class="text-yellow-400" />
               </a>

@@ -1,0 +1,40 @@
+---
+import { getImage } from 'astro:assets';
+import Photo from '../ui/Photo.astro';
+import Icon from '../ui/Icon.astro';
+import { photo, videos } from '../../content/site';
+
+const items = await Promise.all(
+  videos.map(async (v) => ({ ...v, posterUrl: (await getImage({ src: photo(v.poster).src, width: 960, format: 'webp' })).src })),
+);
+---
+
+<section id="video" class="bg-white py-14 sm:py-24" aria-labelledby="video-title">
+  <div class="container-page">
+    <p class="eyebrow" data-reveal>Video</p>
+    <h2 id="video-title" class="h-section mt-3 sm:mt-4" data-reveal>Cuplikan kebersamaan kami.</h2>
+    <ul class="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2">
+      {
+        items.map((v) => (
+          <li data-reveal>
+            <button
+              type="button"
+              class="group relative block aspect-video w-full overflow-hidden rounded-xl text-left"
+              data-video-src={v.src}
+              data-video-title={v.title}
+              data-video-poster={v.posterUrl}
+              aria-label={`Putar video: ${v.title}`}
+            >
+              <Photo id={v.poster} sizes="(min-width: 640px) 560px, 100vw" class="transition-transform duration-700 group-hover:scale-105" />
+              <span class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-900/10 to-transparent" />
+              <span class="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-navy-900 bg-yellow-400 text-ink transition-transform group-hover:scale-110">
+                <Icon name="play" size={26} />
+              </span>
+              <span class="absolute bottom-4 left-5 font-serif text-xl text-white">{v.title}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

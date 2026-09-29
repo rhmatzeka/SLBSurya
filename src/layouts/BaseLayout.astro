@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/sections/Header.astro';
 import Footer from '../components/sections/Footer.astro';
+import VideoDialog from '../components/ui/VideoDialog.astro';
 import { campuses, school, socials } from '../content/site';
 import besleyLatin from '@fontsource-variable/besley/files/besley-latin-wght-normal.woff2?url';
 
@@ -75,6 +76,7 @@ const jsonLd = campuses.map((c) => ({
       <slot />
     </main>
     <Footer />
+    <VideoDialog />
 
     <script>
       // Elemen [data-reveal] muncul halus saat masuk layar

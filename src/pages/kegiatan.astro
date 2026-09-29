@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PageNext from '../components/ui/PageNext.astro';
+import Activities from '../components/sections/Activities.astro';
+import PhotoStrip from '../components/sections/PhotoStrip.astro';
+import VideoGrid from '../components/sections/VideoGrid.astro';
+import { pageByHref } from '../content/site';
+
+const page = pageByHref('/kegiatan');
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <PageHero
+    eyebrow={page.label}
+    title="Belajar, berkarya, dan bergembira bersama."
+    intro="Pentas seni, berkemah, upacara, piknik, hingga podium juara di ajang O2SN dan FLS2N. Beginilah keseharian keluarga besar Surya Wiyata."
+    image="kegiatan/pentas-seni"
+    sections={[
+      { label: 'Kegiatan', href: '#kegiatan' },
+      { label: 'Video', href: '#video' },
+    ]}
+  />
+  <Activities layout="grid" />
+  <PhotoStrip />
+  <VideoGrid />
+  <PageNext href="/galeri" />
+</BaseLayout>

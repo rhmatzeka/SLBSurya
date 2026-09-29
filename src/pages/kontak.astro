@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Campuses from '../components/sections/Campuses.astro';
+import Collaborate from '../components/sections/Collaborate.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { pageByHref } from '../content/site';
+
+const page = pageByHref('/kontak');
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <PageHero
+    eyebrow={page.label}
+    title="Mari berkenalan dengan kami."
+    intro="Hubungi kami lewat email atau datang langsung ke salah satu unit sekolah. Kami juga terbuka untuk kerja sama dengan donatur, komunitas, dan dunia usaha."
+    image="tentang/gedung-1"
+    sections={[
+      { label: 'Unit Sekolah', href: '#kontak' },
+      { label: 'Kerja Sama', href: '#kerja-sama' },
+    ]}
+  />
+  <Campuses />
+  <Collaborate />
+  <FinalCta />
+</BaseLayout>

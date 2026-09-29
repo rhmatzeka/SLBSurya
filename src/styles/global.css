@@ -98,6 +98,36 @@
   }
 }
 
+/* Pindah halaman yang mulus (View Transitions lintas halaman, tanpa JS).
+   Browser yang belum mendukung tetap berpindah halaman seperti biasa. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: 180ms ease-out both vt-fade-out;
+}
+::view-transition-new(root) {
+  animation: 280ms ease-out both vt-fade-in;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Muncul halus saat di-scroll (dimatikan jika reduced-motion) */
 [data-reveal] {
   opacity: 0;

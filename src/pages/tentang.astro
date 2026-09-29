@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PageNext from '../components/ui/PageNext.astro';
+import About from '../components/sections/About.astro';
+import Vision from '../components/sections/Vision.astro';
+import Missions from '../components/sections/Missions.astro';
+import Staff from '../components/sections/Staff.astro';
+import { pageByHref } from '../content/site';
+
+const page = pageByHref('/tentang');
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <PageHero
+    eyebrow={page.label}
+    title="Lebih dari 50 tahun membawa harapan."
+    intro="SLB Surya Wiyata berdiri tahun 1972 di bawah Yayasan Sosial GKI Kwitang 28 Karya Kasih, melayani anak tunarungu, tunagrahita, autisme, dan down syndrome."
+    image="tentang/gedung-2"
+    imagePosition="30% 50%"
+    sections={[
+      { label: 'Sejarah', href: '#sejarah' },
+      { label: 'Visi', href: '#visi' },
+      { label: 'Misi', href: '#visi-misi' },
+      { label: 'Guru & Tendik', href: '#guru' },
+    ]}
+  />
+  <About />
+  <Vision />
+  <Missions />
+  <Staff />
+  <PageNext href="/program" />
+</BaseLayout>

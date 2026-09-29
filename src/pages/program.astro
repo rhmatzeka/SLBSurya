@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PageNext from '../components/ui/PageNext.astro';
+import Programs from '../components/sections/Programs.astro';
+import Levels from '../components/sections/Levels.astro';
+import Schedule from '../components/sections/Schedule.astro';
+import { pageByHref } from '../content/site';
+
+const page = pageByHref('/program');
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <PageHero
+    eyebrow={page.label}
+    title="Belajar sesuai potensi, terampil untuk mandiri."
+    intro="Pembelajaran adaptif dari SDLB hingga SMALB, ditambah lima program vokasi yang melatih keterampilan nyata untuk bekal hidup."
+    image="vokasi/tik-2"
+    sections={[
+      { label: 'Program Vokasi', href: '#program' },
+      { label: 'Jenjang', href: '#jenjang' },
+      { label: 'Jadwal Pekanan', href: '#jadwal' },
+    ]}
+  />
+  <Programs />
+  <Levels />
+  <Schedule />
+  <PageNext href="/sarana" />
+</BaseLayout>

@@ -9,6 +9,11 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // Halaman tujuan dimuat duluan saat link ditunjuk/disentuh, jadi pindah halaman terasa instan
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
   image: {
     responsiveStyles: false,
   },

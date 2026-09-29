@@ -2,13 +2,20 @@
 import Photo from '../ui/Photo.astro';
 import Icon from '../ui/Icon.astro';
 import { activities } from '../../content/site';
+
+interface Props {
+  /** 'slider' untuk beranda, 'grid' untuk halaman Kegiatan */
+  layout?: 'slider' | 'grid';
+}
+const { layout = 'slider' } = Astro.props;
+const grid = layout === 'grid';
 ---
 
-<section id="kegiatan" class="bg-cream py-14 sm:py-24" aria-labelledby="kegiatan-title" data-slider>
+<section id="kegiatan" class="bg-cream py-14 sm:py-24" aria-labelledby="kegiatan-title" data-slider={grid ? undefined : true}>
   <div class="container-page">
     <div class="rule-dashed flex items-center justify-between pb-4">
-      <h2 id="kegiatan-title" class="eyebrow">Kabar Kegiatan</h2>
-      <div class="flex gap-2">
+      <h2 id="kegiatan-title" class="eyebrow">{grid ? 'Semua Kegiatan' : 'Kabar Kegiatan'}</h2>
+      <div class:list={['flex gap-2', grid && 'hidden']}>
         <button
           type="button"
           class="grid h-9 w-9 place-items-center rounded-full border border-ink/70 text-ink transition hover:bg-white disabled:border-line disabled:bg-cream-200 disabled:text-ink/40"
@@ -28,10 +35,19 @@ import { activities } from '../../content/site';
       </div>
     </div>
 
-    <ul class="no-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth sm:mt-8 sm:gap-7" data-slider-track>
+    <ul
+      class:list={[
+        'mt-6 gap-4 sm:mt-8 sm:gap-7',
+        grid ? 'grid grid-cols-2 gap-y-8 lg:grid-cols-3' : 'no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth',
+      ]}
+      data-slider-track
+    >
       {
         activities.map((a) => (
-          <li class="w-[calc((100%-1rem)/2)] shrink-0 snap-start sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]" data-slider-item>
+          <li
+            class:list={[!grid && 'w-[calc((100%-1rem)/2)] shrink-0 snap-start sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]']}
+            data-slider-item
+          >
             <a href="/galeri#kegiatan" class="group block">
               <div class="aspect-[1.52/1] overflow-hidden rounded-xl">
                 <Photo
@@ -56,7 +72,19 @@ import { activities } from '../../content/site';
       }
     </ul>
 
-    <a href="/galeri" class="btn-yellow mt-8 px-6 sm:mt-10">Lihat Semua Foto</a>
+    {
+      grid ? (
+        <a href="/galeri" class="btn-yellow mt-10 px-6">
+          Lihat Galeri Foto
+          <Icon name="arrow-right" size={16} />
+        </a>
+      ) : (
+        <a href="/kegiatan" class="btn-yellow mt-8 px-6 sm:mt-10">
+          Lihat Semua Kegiatan
+          <Icon name="arrow-right" size={16} />
+        </a>
+      )
+    }
   </div>
 </section>
 

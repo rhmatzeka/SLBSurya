@@ -5,9 +5,16 @@ import Photo from '../ui/Photo.astro';
 import Flower from '../ui/Flower.astro';
 import Icon from '../ui/Icon.astro';
 import { about, campuses } from '../../content/site';
+
+interface Props {
+  /** Versi ringkas untuk beranda, dengan tombol ke halaman Tentang */
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const history = compact ? about.history.slice(0, 1) : about.history;
 ---
 
-<section id="tentang" class="relative overflow-hidden bg-cream pb-14 pt-12 sm:pb-20 sm:pt-20 lg:pb-24" aria-labelledby="tentang-title">
+<section id="sejarah" class="relative overflow-hidden bg-cream pb-14 pt-12 sm:pb-20 sm:pt-20 lg:pb-24" aria-labelledby="tentang-title">
   <div class="container-page">
     <p class="eyebrow" data-reveal>Tentang Kami</p>
     <h2 id="tentang-title" class="h-section mt-4 max-w-[22ch]" data-reveal>
@@ -61,7 +68,7 @@ import { about, campuses } from '../../content/site';
       <div class="col-span-2 mt-12 grid gap-9 sm:mt-10 sm:grid-cols-2 sm:gap-10 lg:mt-0 lg:pt-12 lg:pr-10">
         <div data-reveal>
           <p class="eyebrow">Sejarah Kami</p>
-          {about.history.map((p) => <p class="mt-3 text-[16px] leading-[1.7] text-ink/85">{p}</p>)}
+          {history.map((p) => <p class="mt-3 text-[16px] leading-[1.7] text-ink/85">{p}</p>)}
         </div>
         <div data-reveal>
           <p class="eyebrow">Layanan Kekhususan</p>
@@ -80,7 +87,7 @@ import { about, campuses } from '../../content/site';
               ))
             }
           </ul>
-          <p class="mt-5 text-[16px] leading-[1.7] text-ink/85">
+          <p class:list={['mt-5 text-[16px] leading-[1.7] text-ink/85', compact && 'hidden']}>
             Dikelola oleh <strong class="font-semibold">Yayasan Sosial Karya Kasih</strong>, dengan dua unit sekolah dari jenjang
             SDLB hingga SMALB.
           </p>
@@ -89,7 +96,16 @@ import { about, campuses } from '../../content/site';
     </div>
 
     <div class="mt-10" data-reveal>
-      <a href="#visi-misi" class="btn-outline px-6 py-3">Visi & Misi</a>
+      {
+        compact ? (
+          <a href="/tentang" class="btn-outline px-6 py-3">
+            Selengkapnya tentang kami
+            <Icon name="arrow-right" size={16} />
+          </a>
+        ) : (
+          <a href="#visi-misi" class="btn-outline px-6 py-3">Visi & Misi</a>
+        )
+      }
     </div>
   </div>
 </section>

@@ -1,0 +1,60 @@
+---
+/** Kepala halaman untuk setiap halaman selain beranda: jejak navigasi, judul, pengantar, dan lompat ke bagian. */
+import Photo from './Photo.astro';
+import Flower from './Flower.astro';
+import Icon from './Icon.astro';
+import type { PhotoKey } from '../../content/site';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image: PhotoKey;
+  imagePosition?: string;
+  /** Tautan lompat ke bagian di halaman ini */
+  sections?: { label: string; href: string }[];
+}
+
+const { eyebrow, title, intro, image, imagePosition, sections = [] } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-navy-900 text-white" aria-labelledby="page-title">
+  <Flower class="pointer-events-none absolute -right-16 -top-10 hidden h-64 w-64 fill-navy-700/60 lg:block" />
+  <Flower class="pointer-events-none absolute -bottom-16 -left-14 h-40 w-40 fill-navy-700/60 sm:h-52 sm:w-52" />
+
+  <div class="container-page relative grid items-center gap-8 pb-12 pt-6 sm:pb-16 sm:pt-10 lg:grid-cols-[1fr_0.9fr] lg:gap-14 lg:pb-20">
+    <div>
+      <nav aria-label="Jejak navigasi" class="text-[13px] text-white/70">
+        <ol class="flex flex-wrap items-center gap-1.5">
+          <li><a href="/" class="hover:text-yellow-400">Beranda</a></li>
+          <li aria-hidden="true"><Icon name="chevron-right" size={12} /></li>
+          <li aria-current="page" class="text-white">{eyebrow}</li>
+        </ol>
+      </nav>
+      <h1 id="page-title" class="mt-4 font-serif text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.6rem]">{title}</h1>
+      <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-[17px]">{intro}</p>
+
+      {
+        sections.length > 0 && (
+          <div class="mt-7">
+            <p class="text-[12px] font-medium uppercase tracking-wider text-white/60">Di halaman ini</p>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              {sections.map((s) => (
+                <li>
+                  <a href={s.href} class="btn-outline-light py-2 text-[13px]">
+                    {s.label}
+                    <Icon name="chevron-right" size={14} class="rotate-90" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="relative aspect-[16/9] overflow-hidden rounded-xl shadow-2xl shadow-black/20 lg:aspect-[4/3.1]">
+      <Photo id={image} position={imagePosition} priority sizes="(min-width: 1024px) 540px, 100vw" />
+    </div>
+  </div>
+</section>

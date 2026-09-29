@@ -3,7 +3,8 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/ui/Photo.astro';
 import Icon from '../components/ui/Icon.astro';
-import Flower from '../components/ui/Flower.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PageNext from '../components/ui/PageNext.astro';
 import { allPhotos, galleryCategories, type PhotoKey } from '../content/site';
 
 const groups = await Promise.all(
@@ -22,29 +23,14 @@ const total = allPhotos.length;
 ---
 
 <BaseLayout title="Galeri Foto" description="Galeri foto kegiatan, program vokasi, sarana, serta karya dan prestasi siswa SLB Surya Wiyata.">
-  <section class="relative overflow-hidden bg-navy-900 text-white">
-    <Flower class="absolute -right-16 top-6 h-56 w-56 fill-navy-700/70" />
-    <Flower class="absolute -bottom-20 right-40 h-40 w-40 fill-navy-700/60" />
-    <div class="container-page relative py-14 sm:py-20">
-      <a href="/" class="inline-flex items-center gap-2 text-sm text-white/80 hover:text-yellow-400">
-        <Icon name="arrow-left" size={16} /> Kembali ke beranda
-      </a>
-      <h1 class="h-display mt-6">Galeri Foto</h1>
-      <p class="mt-5 max-w-xl text-[17px] leading-relaxed text-white/80">
-        {total} foto kegiatan, program vokasi, sarana, serta karya dan prestasi siswa SLB Surya Wiyata.
-      </p>
-      <nav aria-label="Kategori galeri" class="mt-8 flex flex-wrap gap-2">
-        {
-          groups.map((g) => (
-            <a href={`#${g.id}`} class="btn-outline-light py-2">
-              {g.label}
-              <span class="text-white/60">{g.items.length}</span>
-            </a>
-          ))
-        }
-      </nav>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Galeri"
+    title="Galeri Foto"
+    intro={`${total} foto kegiatan, program vokasi, sarana, serta karya dan prestasi siswa SLB Surya Wiyata. Ketuk foto untuk memperbesar.`}
+    image="kegiatan/wisata-rombongan"
+    imagePosition="50% 70%"
+    sections={groups.map((g) => ({ label: `${g.label} (${g.items.length})`, href: `#${g.id}` }))}
+  />
 
   <div class="bg-cream py-14 sm:py-20" data-gallery>
     <div class="container-page space-y-16 sm:space-y-20">
@@ -79,6 +65,8 @@ const total = allPhotos.length;
       }
     </div>
   </div>
+
+  <PageNext href="/kontak" />
 
   <dialog
     class="m-0 h-dvh max-h-none w-screen max-w-none bg-ink/95 p-0 text-white backdrop:bg-transparent"

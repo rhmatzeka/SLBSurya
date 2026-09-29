@@ -189,14 +189,63 @@ export const campuses: (Campus & typeof foundationLegal)[] = [
 
 export const mapsUrl = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 
-export const nav = [
-  { label: 'Tentang', href: '/#tentang' },
-  { label: 'Program', href: '/#program' },
-  { label: 'Sarana', href: '/#sarana' },
-  { label: 'Kegiatan', href: '/#kegiatan' },
-  { label: 'Galeri', href: '/galeri' },
-  { label: 'Kontak', href: '/#kontak' },
+/** Halaman situs, urut sesuai alur jelajah. Dipakai menu, footer, kartu "Jelajahi", dan kartu "Selanjutnya". */
+export interface PageInfo {
+  href: string;
+  label: string;
+  title: string;
+  description: string;
+  image: PhotoKey;
+}
+
+export const pages: PageInfo[] = [
+  {
+    href: '/tentang',
+    label: 'Tentang',
+    title: 'Tentang Kami',
+    description: 'Sejarah sejak 1972, layanan kekhususan, visi & misi, serta guru yang mendampingi.',
+    image: 'tentang/gedung-2',
+  },
+  {
+    href: '/program',
+    label: 'Program',
+    title: 'Program & Jenjang',
+    description: 'Lima program vokasi, jenjang SDLB hingga SMALB, dan jadwal kegiatan setiap pekan.',
+    image: 'vokasi/tik-2',
+  },
+  {
+    href: '/sarana',
+    label: 'Sarana',
+    title: 'Sarana Sekolah',
+    description: 'Green house, kolam ikan nila, kelas, perpustakaan, dan fasilitas pendukung lainnya.',
+    image: 'sarana/green-house',
+  },
+  {
+    href: '/kegiatan',
+    label: 'Kegiatan',
+    title: 'Kegiatan Siswa',
+    description: 'Pentas seni, berkemah, upacara, piknik, dan prestasi siswa di berbagai ajang.',
+    image: 'kegiatan/pentas-seni',
+  },
+  {
+    href: '/galeri',
+    label: 'Galeri',
+    title: 'Galeri Foto',
+    description: 'Semua foto kegiatan, program vokasi, sarana, serta karya dan prestasi siswa.',
+    image: 'kegiatan/wisata-rombongan',
+  },
+  {
+    href: '/kontak',
+    label: 'Kontak',
+    title: 'Kontak & Kerja Sama',
+    description: 'Alamat dua unit sekolah, email, legalitas, dan cara bermitra dengan kami.',
+    image: 'tentang/gedung-1',
+  },
 ];
+
+export const pageByHref = (href: string) => pages.find((p) => p.href === href)!;
+
+export const nav = pages.map((p) => ({ label: p.label, href: p.href }));
 
 /* ------------------------------------------------------------------ */
 /* Tentang, visi & misi                                                */
