@@ -11,3 +11,6 @@ bahan/
 *.pdf
 screencapture-*.png
 WhatsApp Image *.jpeg
+
+# log alat uji browser
+.playwright-mcp/
