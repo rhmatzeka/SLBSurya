@@ -4,15 +4,15 @@ import Icon from '../ui/Icon.astro';
 import { missions } from '../../content/site';
 ---
 
-<section id="visi-misi" class="overflow-hidden bg-cream py-20 sm:py-24" aria-labelledby="misi-title">
+<section id="visi-misi" class="overflow-hidden bg-cream py-14 sm:py-24" aria-labelledby="misi-title">
   <div class="container-page text-center" data-reveal>
     <p class="eyebrow">Misi Kami</p>
-    <h2 id="misi-title" class="mx-auto mt-4 max-w-[24ch] font-serif text-[2rem] leading-[1.15] text-navy-700 sm:text-[2.7rem]">
+    <h2 id="misi-title" class="mx-auto mt-3 max-w-[24ch] font-serif text-[1.55rem] leading-[1.18] text-navy-700 sm:mt-4 sm:text-[2.7rem]">
       Lima misi yang menuntun kami menemukan dan merawat potensi unik setiap anak.
     </h2>
   </div>
 
-  <div class="relative mt-12" data-carousel>
+  <div class="relative mt-8 sm:mt-12" data-carousel>
     <ul
       class="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[max(1rem,calc(50vw-190px))] pb-2 sm:gap-8 sm:px-[calc(50vw-200px)]"
       data-carousel-track
@@ -27,7 +27,7 @@ import { missions } from '../../content/site';
               </div>
               <div class="relative -mt-24 mx-4 rounded-xl bg-white px-5 py-6 text-center shadow-[0_18px_40px_-22px_rgba(10,58,96,0.35)] sm:mx-6">
                 <p class="text-xs font-semibold tracking-wider text-blue-600">MISI {i + 1}</p>
-                <h3 class="mt-1 font-serif text-[1.7rem] leading-tight text-ink sm:text-3xl">{m.title}</h3>
+                <h3 class="mt-1 font-serif text-[1.45rem] leading-tight text-ink sm:text-3xl">{m.title}</h3>
                 <p class="mt-3 text-[15px] leading-relaxed text-muted">{m.text}</p>
               </div>
             </article>

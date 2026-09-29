@@ -5,7 +5,7 @@ import Icon from '../ui/Icon.astro';
 import { facilityGroups } from '../../content/site';
 ---
 
-<section id="sarana" class="relative bg-cream pt-20 sm:pt-24" aria-labelledby="sarana-title">
+<section id="sarana" class="relative bg-cream pt-14 sm:pt-24" aria-labelledby="sarana-title">
   <div class="container-page">
     <div class="max-w-2xl" data-reveal>
       <p class="eyebrow">Sarana Penunjang</p>
@@ -16,7 +16,7 @@ import { facilityGroups } from '../../content/site';
       </p>
     </div>
 
-    <div class="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Kategori sarana" data-tabs>
+    <div class="mt-8 flex flex-wrap gap-2 sm:mt-10" role="tablist" aria-label="Kategori sarana" data-tabs>
       {
         facilityGroups.map((g, i) => (
           <button
@@ -50,7 +50,7 @@ import { facilityGroups } from '../../content/site';
               <div
                 class:list={[
                   'overflow-hidden rounded-lg',
-                  k === 0 ? 'col-span-2 row-span-2 aspect-[4/3] sm:aspect-auto' : 'aspect-square sm:aspect-auto',
+                  k === 0 ? 'col-span-2 row-span-2 aspect-[16/11] sm:aspect-auto' : 'hidden aspect-square sm:block sm:aspect-auto',
                   k === 1 && 'sm:col-span-2',
                 ]}
               >
@@ -59,8 +59,8 @@ import { facilityGroups } from '../../content/site';
             ))}
           </div>
 
-          <div class="relative -mt-10 ml-3 mr-3 rounded-xl bg-white p-6 shadow-xl shadow-navy-900/10 sm:-mt-24 sm:ml-8 sm:mr-0 sm:max-w-[460px] sm:p-7">
-            <h3 class="font-serif text-2xl text-blue-600 sm:text-[1.7rem]">{g.title}</h3>
+          <div class="relative mt-4 rounded-xl bg-white p-5 shadow-xl shadow-navy-900/10 sm:-mt-24 sm:ml-8 sm:max-w-[460px] sm:p-7">
+            <h3 class="font-serif text-xl text-blue-600 sm:text-[1.7rem]">{g.title}</h3>
             <p class="mt-3 text-[15px] leading-relaxed text-muted">{g.text}</p>
             <ul class="mt-4 grid gap-2 text-[15px]">
               {g.items.map((item) => (

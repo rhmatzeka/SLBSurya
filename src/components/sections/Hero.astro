@@ -24,7 +24,7 @@ const flowers = [
 ---
 
 <section class="relative overflow-hidden bg-navy-900 text-white" aria-labelledby="hero-title">
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+  <div class="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
     {
       flowers.map((f) => (
         <div class="absolute" style={`left:${f.x};top:${f.y};width:${f.s}px;height:${f.s}px`}>
@@ -34,17 +34,25 @@ const flowers = [
     }
   </div>
 
-  <div class="container-page relative grid items-center gap-10 pb-14 pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-6 lg:pb-16 lg:pt-10">
+  <div class="pointer-events-none absolute inset-x-[-6%] bottom-[-38px] flex items-end justify-between lg:hidden" aria-hidden="true">
+    {
+      [70, 110, 60, 95, 130, 75, 100, 65].map((sz, i) => (
+        <Flower class="shrink-0 fill-navy-700/80" style={`width:${sz}px;height:${sz}px;margin-bottom:${(i % 3) * -14}px`} />
+      ))
+    }
+  </div>
+
+  <div class="container-page relative grid items-center gap-7 pb-20 pt-3 sm:gap-10 sm:pb-14 sm:pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-6 lg:pb-16 lg:pt-10">
     <div class="relative z-10 lg:-mr-24">
-      <p class="font-serif text-base text-white/80 sm:text-lg">Sekolah Luar Biasa sejak 1972</p>
-      <h1 id="hero-title" class="h-display mt-4 max-w-[13ch]">
+      <p class="font-serif text-[15px] text-white/80 sm:text-lg">Sekolah Luar Biasa sejak 1972</p>
+      <h1 id="hero-title" class="h-display mt-2 max-w-[16ch] sm:mt-4 sm:max-w-[13ch]">
         Membawa harapan untuk masa depan yang lebih cerah.
       </h1>
-      <p class="mt-6 max-w-md text-base leading-relaxed text-white/80 sm:text-[17px]">
+      <p class="mt-6 hidden max-w-md text-base leading-relaxed text-white/80 sm:block sm:text-[17px]">
         Pendidikan yang adaptif dan penuh kasih untuk anak tunarungu, tunagrahita, autisme, dan down syndrome, di Bekasi dan
         Jakarta Timur.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <div class="mt-8 hidden flex-wrap gap-3 sm:flex">
         <a href="#kontak" class="btn-yellow border-transparent px-6 py-3 text-[15px]">
           Hubungi Kami
           <Icon name="arrow-right" size={18} />
@@ -52,7 +60,7 @@ const flowers = [
         <a href="#tentang" class="btn-outline-light px-6 py-3 text-[15px]">Kenali Kami</a>
       </div>
 
-      <div class="mt-12 hidden gap-2 lg:flex" role="tablist" aria-label="Pilih foto" data-hero-dots>
+      <div class="mt-7 flex gap-2 lg:mt-12" role="tablist" aria-label="Pilih foto" data-hero-dots>
         {
           slides.map((_, i) => (
             <button
@@ -68,8 +76,8 @@ const flowers = [
       </div>
     </div>
 
-    <div class="relative">
-      <div class="relative aspect-[4/3] overflow-hidden rounded-xl bg-navy-700 shadow-2xl shadow-black/20 sm:rounded-2xl lg:aspect-auto lg:h-[500px]">
+    <div class="relative order-first lg:order-none">
+      <div class="relative aspect-[16/10.5] overflow-hidden rounded-xl bg-navy-700 shadow-2xl shadow-black/20 sm:rounded-2xl lg:aspect-auto lg:h-[500px]">
         {
           slides.map((s, i) => (
             <div
@@ -89,9 +97,6 @@ const flowers = [
           ))
         }
       </div>
-      <div class="mt-5 flex gap-2 lg:hidden" aria-hidden="true">
-        {slides.map((_, i) => <span class:list={['h-1 w-6 rounded-full', i === 0 ? 'bg-yellow-400' : 'bg-white/30']} data-hero-bar={i} />)}
-      </div>
     </div>
   </div>
 </section>
@@ -99,7 +104,6 @@ const flowers = [
 <script>
   const slides = [...document.querySelectorAll<HTMLElement>('[data-hero-slide]')];
   const dots = [...document.querySelectorAll<HTMLButtonElement>('[data-hero-dot]')];
-  const bars = [...document.querySelectorAll<HTMLElement>('[data-hero-bar]')];
   let current = 0;
   let timer: number | undefined;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -113,10 +117,6 @@ const flowers = [
       s.classList.toggle('opacity-0', i !== current);
     });
     dots.forEach((d, i) => d.setAttribute('aria-selected', String(i === current)));
-    bars.forEach((b, i) => {
-      b.classList.toggle('bg-yellow-400', i === current);
-      b.classList.toggle('bg-white/30', i !== current);
-    });
   };
   // Foto berikutnya baru dimuat tepat sebelum gilirannya tampil, supaya foto pertama (LCP) tidak berebut bandwidth
   const prepare = (n: number) => slides[(n + slides.length) % slides.length]?.classList.remove('hidden');

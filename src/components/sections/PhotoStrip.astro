@@ -4,11 +4,11 @@ import { photoStrip } from '../../content/site';
 ---
 
 <section class="overflow-hidden bg-cream pb-6" aria-label="Foto kegiatan siswa">
-  <ul class="no-scrollbar flex snap-x gap-4 overflow-x-auto px-4 sm:gap-12 sm:px-0 sm:[margin-left:-4vw]">
+  <ul class="no-scrollbar flex snap-x gap-3 overflow-x-auto px-4 sm:gap-12 sm:px-0 sm:[margin-left:-4vw]">
     {
       photoStrip.map((id) => (
-        <li class="aspect-[1.2/1] w-[78vw] shrink-0 snap-center overflow-hidden rounded-xl sm:w-[29vw]">
-          <Photo id={id} sizes="(min-width: 640px) 30vw, 80vw" widths={[400, 640, 900]} position="50% 35%" />
+        <li class="aspect-[1.5/1] w-[34vw] shrink-0 snap-start overflow-hidden rounded-lg sm:aspect-[1.2/1] sm:w-[29vw] sm:rounded-xl">
+          <Photo id={id} sizes="(min-width: 640px) 30vw, 34vw" widths={[300, 480, 640, 900]} position="50% 35%" />
         </li>
       ))
     }

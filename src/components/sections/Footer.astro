@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 <footer class="relative overflow-hidden bg-navy-900 text-white">
   <SunRise class="pointer-events-none absolute bottom-0 left-1/2 w-[760px] max-w-none -translate-x-1/2 sm:w-[900px]" />
 
-  <div class="container-page relative pb-48 pt-16 sm:pb-64">
+  <div class="container-page relative pb-44 pt-12 sm:pb-64 sm:pt-16">
     <div class="flex flex-wrap items-center gap-4">
       <Image src={logo} alt="" width={56} height={56} densities={[1, 2]} class="h-14 w-14" />
       <div>
@@ -35,7 +35,53 @@ const year = new Date().getFullYear();
       }
     </div>
 
-    <div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+    <!-- HP: accordion (seperti referensi mobile) -->
+    <div class="mt-8 divide-y divide-white/10 border-y border-white/10 lg:hidden">
+      <details class="group py-1">
+        <summary class="flex cursor-pointer list-none items-center justify-between py-2.5 font-serif text-lg [&::-webkit-details-marker]:hidden">
+          Jelajahi
+          <span class="grid h-7 w-7 place-items-center rounded-full border border-white/30 transition-transform group-open:rotate-180">
+            <Icon name="chevron-right" size={14} class="rotate-90" />
+          </span>
+        </summary>
+        <ul class="space-y-2.5 pb-4 pt-1 text-[14px] font-medium">
+          {nav.map((n) => <li><a href={n.href} class="hover:text-yellow-400">{n.label}</a></li>)}
+        </ul>
+      </details>
+      <details class="group py-1">
+        <summary class="flex cursor-pointer list-none items-center justify-between py-2.5 font-serif text-lg [&::-webkit-details-marker]:hidden">
+          Program Vokasi
+          <span class="grid h-7 w-7 place-items-center rounded-full border border-white/30 transition-transform group-open:rotate-180">
+            <Icon name="chevron-right" size={14} class="rotate-90" />
+          </span>
+        </summary>
+        <ul class="space-y-2.5 pb-4 pt-1 text-[14px] font-medium">
+          {programs.slice(0, 5).map((p) => <li><a href={`/#${p.id}`} class="hover:text-yellow-400">{p.title}</a></li>)}
+        </ul>
+      </details>
+      {
+        campuses.map((c) => (
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-2.5 font-serif text-lg [&::-webkit-details-marker]:hidden">
+              {c.name}
+              <span class="grid h-7 w-7 place-items-center rounded-full border border-white/30 transition-transform group-open:rotate-180">
+                <Icon name="chevron-right" size={14} class="rotate-90" />
+              </span>
+            </summary>
+            <div class="pb-4 pt-1 text-[14px]">
+              <address class="space-y-0.5 not-italic leading-relaxed text-white/85">
+                {c.address.map((l) => <span class="block">{l}</span>)}
+              </address>
+              <a href={`mailto:${c.email}`} class="mt-2 block break-all font-medium hover:text-yellow-400">{c.email}</a>
+              <p class="mt-1 text-[13px] text-white/60">NPSN {c.npsn}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <!-- Desktop: empat kolom -->
+    <div class="mt-12 hidden gap-10 lg:grid lg:grid-cols-4 lg:gap-0">
       <div class="lg:border-r lg:border-dashed lg:border-white/15 lg:pr-8">
         <h2 class="font-serif text-[1.35rem] text-white/90">Jelajahi</h2>
         <ul class="mt-4 space-y-2.5 text-[14px] font-medium">
@@ -64,7 +110,7 @@ const year = new Date().getFullYear();
       }
     </div>
 
-    <div class="mt-12 flex flex-wrap gap-2">
+    <div class="mt-8 flex flex-wrap gap-2 lg:mt-12">
       {
         socials.map((s) => (
           <a href={s.href} target="_blank" rel="noopener" class="btn-outline-light py-2 text-[13px]">

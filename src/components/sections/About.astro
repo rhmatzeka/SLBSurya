@@ -7,7 +7,7 @@ import Icon from '../ui/Icon.astro';
 import { about, campuses } from '../../content/site';
 ---
 
-<section id="tentang" class="relative overflow-hidden bg-cream pb-20 pt-16 sm:pt-20 lg:pb-24" aria-labelledby="tentang-title">
+<section id="tentang" class="relative overflow-hidden bg-cream pb-14 pt-12 sm:pb-20 sm:pt-20 lg:pb-24" aria-labelledby="tentang-title">
   <div class="container-page">
     <p class="eyebrow" data-reveal>Tentang Kami</p>
     <h2 id="tentang-title" class="h-section mt-4 max-w-[22ch]" data-reveal>
@@ -15,30 +15,37 @@ import { about, campuses } from '../../content/site';
     </h2>
 
     <!-- Kolase: foto besar, kartu lokasi, foto tinggi (meniru kolase referensi) -->
-    <div class="relative mt-10 grid grid-cols-2 gap-3 sm:mt-12 lg:grid-cols-[1.55fr_1fr_1fr] lg:gap-3">
-      <div class="relative col-span-2 aspect-[4/3] overflow-hidden rounded-xl lg:col-span-1 lg:aspect-auto lg:h-[330px]" data-reveal>
-        <Photo id="kegiatan/kebersamaan-2" sizes="(min-width: 1024px) 480px, 100vw" position="50% 35%" />
+    <div class="relative mt-7 grid grid-cols-[1.55fr_1fr] gap-2.5 sm:mt-12 sm:gap-3 lg:grid-cols-[1.55fr_1fr_1fr]">
+      <div class="relative" data-reveal>
+        <div class="aspect-[4/3.2] overflow-hidden rounded-lg sm:rounded-xl lg:aspect-auto lg:h-[330px]">
+          <Photo id="kegiatan/kebersamaan-2" sizes="(min-width: 1024px) 480px, 60vw" position="50% 35%" />
+        </div>
+        <Flower
+          class="pointer-events-none absolute -bottom-8 -left-3 z-10 h-14 w-14 fill-blue-500 sm:-bottom-11 sm:-left-5 sm:h-20 sm:w-20"
+          ring
+          ringClass="fill-yellow-400"
+        />
       </div>
 
       <div
-        class="relative flex aspect-square flex-col justify-between overflow-hidden rounded-xl bg-blue-500 p-5 text-white sm:p-6 lg:aspect-auto lg:h-[330px]"
+        class="relative flex flex-col justify-between overflow-hidden rounded-lg bg-blue-500 p-3 text-white sm:rounded-xl sm:p-6 lg:h-[330px]"
         data-reveal
       >
         <Flower class="absolute -right-10 -top-10 h-44 w-44 fill-white/10" />
         <Flower class="absolute -bottom-14 -left-12 h-40 w-40 fill-navy-700/25" />
         <div class="relative">
-          <Image src={logo} alt="" width={64} height={64} densities={[1, 2]} class="h-14 w-14 sm:h-16 sm:w-16" />
+          <Image src={logo} alt="" width={64} height={64} densities={[1, 2]} class="h-10 w-10 sm:h-16 sm:w-16" />
         </div>
-        <ul class="relative space-y-3">
+        <ul class="relative space-y-1.5 sm:space-y-3">
           {
             campuses.map((c) => (
               <li class="flex items-start gap-2">
-                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-yellow-400 text-ink">
+                <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-yellow-400 text-ink sm:h-6 sm:w-6">
                   <Icon name="pin" size={14} strokeWidth={2.2} />
                 </span>
                 <span>
-                  <span class="block font-serif text-lg leading-tight sm:text-xl">{c.short}</span>
-                  <span class="block text-xs text-white/85 sm:text-[13px]">{c.area}</span>
+                  <span class="block font-serif text-[15px] leading-tight sm:text-xl">{c.short}</span>
+                  <span class="hidden text-[13px] text-white/85 sm:block">{c.area}</span>
                 </span>
               </li>
             ))
@@ -46,12 +53,12 @@ import { about, campuses } from '../../content/site';
         </ul>
       </div>
 
-      <div class="relative aspect-square overflow-hidden rounded-xl lg:row-span-2 lg:mt-24 lg:aspect-auto lg:h-[420px]" data-reveal>
+      <div class="relative hidden overflow-hidden rounded-xl lg:row-span-2 lg:mt-24 lg:block lg:h-[420px]" data-reveal>
         <Photo id="tentang/gedung-2" sizes="(min-width: 1024px) 320px, 50vw" position="30% 50%" />
       </div>
 
       <!-- Teks dua kolom -->
-      <div class="col-span-2 mt-10 grid gap-10 sm:grid-cols-2 lg:mt-0 lg:pt-12 lg:pr-10">
+      <div class="col-span-2 mt-12 grid gap-9 sm:mt-10 sm:grid-cols-2 sm:gap-10 lg:mt-0 lg:pt-12 lg:pr-10">
         <div data-reveal>
           <p class="eyebrow">Sejarah Kami</p>
           {about.history.map((p) => <p class="mt-3 text-[16px] leading-[1.7] text-ink/85">{p}</p>)}

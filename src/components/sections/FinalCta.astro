@@ -12,22 +12,22 @@ const instagram = socials.find((s) => s.id === 'instagram')!;
     <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-900/45 to-navy-900/20"></div>
   </div>
 
-  <div class="container-page pt-40 sm:pt-56">
+  <div class="container-page pt-48 sm:pt-56">
     <h2 id="cta-title" class="h-display max-w-[14ch] drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]" data-reveal>
       Mari membawa harapan bersama kami.
     </h2>
 
-    <div class="mt-10 grid overflow-hidden rounded-t-xl text-lg sm:mt-14 sm:max-w-[660px] sm:grid-cols-3">
-      <a href={`mailto:${campuses[0].email}`} class="flex items-center gap-2 bg-navy-700 px-6 py-5 font-serif transition hover:bg-navy-900">
-        <Icon name="mail" size={18} />
-        Email Unit BC
+    <div class="mt-8 grid grid-cols-3 overflow-hidden rounded-t-xl text-[15px] sm:mt-14 sm:max-w-[660px] sm:text-lg">
+      <a href={`mailto:${campuses[0].email}`} class="flex items-center gap-1.5 bg-navy-700 px-3 py-4 font-serif sm:gap-2 sm:px-6 sm:py-5 transition hover:bg-navy-900">
+        <Icon name="mail" size={16} class="shrink-0" />
+        <span><span class="hidden sm:inline">Email </span>Unit BC</span>
       </a>
-      <a href={`mailto:${campuses[1].email}`} class="flex items-center gap-2 bg-blue-600 px-6 py-5 font-serif transition hover:bg-blue-500">
-        <Icon name="mail" size={18} />
-        Email Unit C
+      <a href={`mailto:${campuses[1].email}`} class="flex items-center gap-1.5 bg-blue-600 px-3 py-4 font-serif sm:gap-2 sm:px-6 sm:py-5 transition hover:bg-blue-500">
+        <Icon name="mail" size={16} class="shrink-0" />
+        <span><span class="hidden sm:inline">Email </span>Unit C</span>
       </a>
-      <a href={instagram.href} target="_blank" rel="noopener" class="flex items-center gap-2 bg-yellow-400 px-6 py-5 font-serif text-ink transition hover:bg-yellow-300">
-        <Icon name="instagram" size={18} />
+      <a href={instagram.href} target="_blank" rel="noopener" class="flex items-center gap-1.5 bg-yellow-400 px-3 py-4 font-serif sm:gap-2 sm:px-6 sm:py-5 text-ink transition hover:bg-yellow-300">
+        <Icon name="instagram" size={16} class="shrink-0" />
         Instagram
       </a>
     </div>

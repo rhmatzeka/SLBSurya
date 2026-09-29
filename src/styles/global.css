@@ -68,10 +68,10 @@
   @apply text-[13px] font-medium tracking-[0.01em] text-blue-600;
 }
 @utility h-display {
-  @apply font-serif text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[4.4rem];
+  @apply font-serif text-[1.95rem] leading-[1.1] sm:text-6xl lg:text-[4.4rem];
 }
 @utility h-section {
-  @apply font-serif text-[2rem] leading-[1.12] text-navy-700 sm:text-[2.6rem];
+  @apply font-serif text-[1.6rem] leading-[1.16] text-navy-700 sm:text-[2.6rem];
 }
 @utility rule-dashed {
   background-image: linear-gradient(to right, var(--color-line) 50%, transparent 0);

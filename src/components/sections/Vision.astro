@@ -10,20 +10,20 @@ const poster = await getImage({ src: photo(video.poster).src, width: 960, format
 ---
 
 <section class="relative overflow-hidden bg-navy-700 text-white" aria-labelledby="visi-title">
-  <div class="absolute inset-y-0 right-0 hidden w-1/2 lg:block" aria-hidden="true">
-    <Photo id="kegiatan/kebersamaan-1" sizes="50vw" />
+  <div class="absolute inset-0 lg:left-auto lg:w-1/2" aria-hidden="true">
+    <Photo id="kegiatan/kebersamaan-1" sizes="(min-width: 1024px) 50vw, 100vw" />
     <div class="absolute inset-0 bg-navy-700/75 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-navy-900/30"></div>
+    <div class="absolute inset-0 bg-navy-900/55 lg:bg-navy-900/30"></div>
   </div>
 
-  <div class="container-page relative grid gap-10 py-16 sm:py-20 lg:grid-cols-[auto_1fr] lg:gap-8 lg:py-24">
+  <div class="container-page relative grid gap-6 pb-40 pt-14 sm:gap-10 sm:py-20 lg:grid-cols-[auto_1fr] lg:gap-8 lg:py-24">
     <span class="grid h-12 w-12 place-items-center rounded-full bg-blue-500 font-serif text-4xl leading-none text-white" aria-hidden="true">
       “
     </span>
 
     <div class="max-w-[640px] lg:max-w-[500px]" data-reveal>
       <h2 id="visi-title" class="sr-only">Visi SLB Surya Wiyata</h2>
-      <blockquote class="font-serif text-[1.45rem] leading-[1.35] sm:text-[1.85rem]">
+      <blockquote class="font-serif text-[1.25rem] leading-[1.35] sm:text-[1.85rem]">
         {vision}
       </blockquote>
 
@@ -42,7 +42,7 @@ const poster = await getImage({ src: photo(video.poster).src, width: 960, format
     <!-- Tombol putar dengan teks melingkar (seperti "Listen now" di referensi) -->
     <button
       type="button"
-      class="group relative mx-auto grid h-[132px] w-[132px] place-items-center rounded-full bg-white lg:absolute lg:left-[calc(50%+120px)] lg:top-1/2 lg:mx-0 lg:-translate-x-1/2 lg:-translate-y-1/2"
+      class="group absolute bottom-10 right-4 grid h-[112px] w-[112px] place-items-center rounded-full bg-white sm:right-8 lg:bottom-auto lg:left-[calc(50%+120px)] lg:right-auto lg:top-1/2 lg:h-[132px] lg:w-[132px] lg:-translate-x-1/2 lg:-translate-y-1/2"
       aria-label={`Putar video: ${video.title}`}
       data-video-src={video.src}
       data-video-title={video.title}
@@ -56,7 +56,7 @@ const poster = await getImage({ src: photo(video.poster).src, width: 960, format
           <textPath href="#lingkar-teks">PUTAR VIDEO · PUTAR VIDEO · PUTAR VIDEO ·</textPath>
         </text>
       </svg>
-      <span class="grid h-[84px] w-[84px] place-items-center rounded-full border-2 border-navy-900 bg-yellow-400 text-ink transition-transform group-hover:scale-105">
+      <span class="grid h-[70px] w-[70px] place-items-center rounded-full border-2 border-navy-900 bg-yellow-400 text-ink transition-transform group-hover:scale-105 lg:h-[84px] lg:w-[84px]">
         <Icon name="play" size={34} />
       </span>
     </button>

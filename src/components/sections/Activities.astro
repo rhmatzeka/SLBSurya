@@ -4,7 +4,7 @@ import Icon from '../ui/Icon.astro';
 import { activities } from '../../content/site';
 ---
 
-<section id="kegiatan" class="bg-cream py-20 sm:py-24" aria-labelledby="kegiatan-title" data-slider>
+<section id="kegiatan" class="bg-cream py-14 sm:py-24" aria-labelledby="kegiatan-title" data-slider>
   <div class="container-page">
     <div class="rule-dashed flex items-center justify-between pb-4">
       <h2 id="kegiatan-title" class="eyebrow">Kabar Kegiatan</h2>
@@ -28,25 +28,25 @@ import { activities } from '../../content/site';
       </div>
     </div>
 
-    <ul class="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-4 sm:mx-0 sm:gap-7 sm:px-0" data-slider-track>
+    <ul class="no-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth sm:mt-8 sm:gap-7" data-slider-track>
       {
         activities.map((a) => (
-          <li class="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]" data-slider-item>
+          <li class="w-[calc((100%-1rem)/2)] shrink-0 snap-start sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]" data-slider-item>
             <a href="/galeri#kegiatan" class="group block">
               <div class="aspect-[1.52/1] overflow-hidden rounded-xl">
                 <Photo
                   id={a.image}
-                  sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 80vw"
+                  sizes="(min-width: 1024px) 380px, 50vw"
                   widths={[400, 640, 800]}
                   class="transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div class="mt-4 flex items-start justify-between gap-4">
+              <div class="mt-3 flex items-start justify-between gap-2 sm:mt-4 sm:gap-4">
                 <div>
-                  <h3 class="font-serif text-[1.15rem] leading-snug text-ink">{a.title}</h3>
-                  <p class="mt-1.5 text-[13px] text-muted">{a.tag}</p>
+                  <h3 class="font-serif text-[0.95rem] leading-snug text-ink sm:text-[1.15rem]">{a.title}</h3>
+                  <p class="mt-1 text-[12px] text-muted sm:mt-1.5 sm:text-[13px]">{a.tag}</p>
                 </div>
-                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ink transition group-hover:border-ink group-hover:bg-yellow-400">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-ink transition group-hover:border-ink group-hover:bg-yellow-400 sm:h-8 sm:w-8">
                   <Icon name="chevron-right" size={16} strokeWidth={2.2} />
                 </span>
               </div>
@@ -56,7 +56,7 @@ import { activities } from '../../content/site';
       }
     </ul>
 
-    <a href="/galeri" class="btn-yellow mt-10 px-6">Lihat Semua Foto</a>
+    <a href="/galeri" class="btn-yellow mt-8 px-6 sm:mt-10">Lihat Semua Foto</a>
   </div>
 </section>
 
