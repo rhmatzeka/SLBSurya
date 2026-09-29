@@ -23,7 +23,7 @@ const flowers = [
 ];
 ---
 
-<section class="relative overflow-hidden bg-navy-900 text-white" aria-labelledby="hero-title">
+<section class="relative flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden bg-navy-900 text-white sm:block sm:min-h-0" aria-labelledby="hero-title">
   <div class="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
     {
       flowers.map((f) => (
@@ -34,30 +34,43 @@ const flowers = [
     }
   </div>
 
-  <div class="pointer-events-none absolute inset-x-[-6%] bottom-[-38px] flex items-end justify-between lg:hidden" aria-hidden="true">
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 lg:hidden" aria-hidden="true">
     {
-      [70, 110, 60, 95, 130, 75, 100, 65].map((sz, i) => (
-        <Flower class="shrink-0 fill-navy-700/80" style={`width:${sz}px;height:${sz}px;margin-bottom:${(i % 3) * -14}px`} />
+      [
+        { x: -4, s: 74, y: -22 },
+        { x: 14, s: 46, y: -10 },
+        { x: 27, s: 60, y: -26 },
+        { x: 44, s: 40, y: -8 },
+        { x: 57, s: 66, y: -24 },
+        { x: 74, s: 48, y: -12 },
+        { x: 86, s: 80, y: -30 },
+      ].map((f) => (
+        <Flower
+          class="absolute fill-navy-700/70"
+          ring
+          ringClass="fill-navy-900/50"
+          style={`left:${f.x}%;bottom:${f.y}px;width:${f.s}px;height:${f.s}px`}
+        />
       ))
     }
   </div>
 
-  <div class="container-page relative grid items-center gap-7 pb-20 pt-3 sm:gap-10 sm:pb-14 sm:pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-6 lg:pb-16 lg:pt-10">
+  <div class="container-page relative grid flex-1 content-center items-center gap-7 pb-24 pt-3 sm:gap-10 sm:pb-14 sm:pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-6 lg:pb-16 lg:pt-10">
     <div class="relative z-10 lg:-mr-24">
       <p class="font-serif text-[15px] text-white/80 sm:text-lg">Sekolah Luar Biasa sejak 1972</p>
       <h1 id="hero-title" class="h-display mt-2 max-w-[16ch] sm:mt-4 sm:max-w-[13ch]">
         Membawa harapan untuk masa depan yang lebih cerah.
       </h1>
-      <p class="mt-6 hidden max-w-md text-base leading-relaxed text-white/80 sm:block sm:text-[17px]">
+      <p class="mt-4 max-w-md text-[15px] leading-relaxed text-white/80 sm:mt-6 sm:text-[17px]">
         Pendidikan yang adaptif dan penuh kasih untuk anak tunarungu, tunagrahita, autisme, dan down syndrome, di Bekasi dan
         Jakarta Timur.
       </p>
-      <div class="mt-8 hidden flex-wrap gap-3 sm:flex">
-        <a href="#kontak" class="btn-yellow border-transparent px-6 py-3 text-[15px]">
+      <div class="mt-6 flex flex-wrap gap-3 sm:mt-8">
+        <a href="#kontak" class="btn-yellow border-transparent px-5 py-2.5 sm:px-6 sm:py-3 sm:text-[15px]">
           Hubungi Kami
           <Icon name="arrow-right" size={18} />
         </a>
-        <a href="#tentang" class="btn-outline-light px-6 py-3 text-[15px]">Kenali Kami</a>
+        <a href="#tentang" class="btn-outline-light px-5 py-2.5 sm:px-6 sm:py-3 sm:text-[15px]">Kenali Kami</a>
       </div>
 
       <div class="mt-7 flex gap-2 lg:mt-12" role="tablist" aria-label="Pilih foto" data-hero-dots>
