@@ -6,6 +6,8 @@ The official landing page of **SLB Surya Wiyata**, a special-needs school (*Seko
 
 The site itself is in Indonesian, because it is written for parents, donors, and partners in Indonesia.
 
+![SLB Surya Wiyata home page](docs/images/preview.png)
+
 ## Features
 
 - **Seven focused pages** instead of one long page: Home, About (`/tentang`), Programs (`/program`), Facilities (`/sarana`), Activities (`/kegiatan`), Gallery (`/galeri`), and Contact (`/kontak`)
